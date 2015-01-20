@@ -37,7 +37,6 @@ module Noaa
 	      @station_ids.each do |station_id|
 	        puts "scraping --> #{station_id}" if options[:verbose]
 	        h = scrape_station(url_by_id(station_id))
-	        puts h.inspect
 	        #h = url_by_id(station_id)
 	        stats[:stations].push h
 	        stats[:station_count] += 1
