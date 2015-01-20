@@ -31,7 +31,7 @@ module Noaa
 	    end
 
 	    def convert_degrees_to_decimal(degree_string)
-	    	degree_string.gsub(/(\d+)° (\d+\.\d{1,2})' (\w)/) do
+	    	degree_string.gsub(/(\d+)° (\d+(\.\d{1,2})?)' (\w)/) do
 	    		 decimal = $1.to_f + $2.to_f/60
 	    		 decimal = decimal * -1 if ($3 == 'S' or $3 == 'W')
 	    		 decimal
