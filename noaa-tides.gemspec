@@ -9,8 +9,6 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Charlie White"]
   spec.email         = ["rcwhitejr@gmail.com"]
   spec.summary       = %q{Buoy & Tide data from the NOAA CO-OPS API}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
