@@ -3,7 +3,7 @@ module Noaa
 		class NoaaStationObservation
 			include HTTParty
   		base_uri Noaa::BASE_URL
-  		debug_output
+  		#debug_output
 			
 			def initialize station_id, timestamp, options = {}
 				@station_id = station_id
