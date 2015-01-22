@@ -41,7 +41,6 @@ module Noaa
 			def get params
 				result = self.class.get("/api/datagetter", {query: params}).parsed_response
 				parsed_result = JSON.parse(result)
-				puts parsed_result
 				if parsed_result && !parsed_result["error"]
 					closest_to_time(@timestamp, parsed_result["data"])
 				else
