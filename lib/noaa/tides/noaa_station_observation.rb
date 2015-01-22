@@ -3,7 +3,7 @@ module Noaa
 		class NoaaStationObservation
 			include HTTParty
   		base_uri Noaa::BASE_URL
-  		#debug_output
+  		debug_output
 			
 			def initialize station_id, timestamp, options = {}
 				@station_id = station_id
@@ -41,7 +41,12 @@ module Noaa
 			def get params
 				result = self.class.get("/api/datagetter", {query: params}).parsed_response
 				parsed_result = JSON.parse(result)
-				closest_to_time(@timestamp, parsed_result["data"])
+				puts parsed_result
+				if parsed_result && !parsed_result["error"]
+					closest_to_time(@timestamp, parsed_result["data"])
+				else
+					nil
+				end
 			end
 
 			def default_params
@@ -56,9 +61,10 @@ module Noaa
 	    	if (datetime.to_date == Date.today)
 	    			{date: "today"}
 	    	else
-	    		{begin_date: datetime.beginning_of_day, end_date: datetime.end_of_day}
+	    		{begin_date: datetime.beginning_of_day.strftime("%m/%d/%Y %H:%M"), end_date: datetime.end_of_day.strftime("%m/%d/%Y %H:%M")}
 	    	end
 	    end
+
 
 	    def closest_to_time(timestamp, t_array)
 			  t_array.min{ |a,b|  (timestamp-DateTime.parse(a["t"])).abs <=> (timestamp-DateTime.parse(b["t"])).abs  }
